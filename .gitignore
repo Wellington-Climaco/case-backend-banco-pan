@@ -1,0 +1,163 @@
+# Visual Studio
+.vscode/
+.vs/
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+history/
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Mono Auto Generated Files
+mono_crash.*
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows shortcuts
+*.lnk
+
+# Files built by Visual Studio
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Roslyn cache directories
+# if you have not enabled the 'Generate .editorconfig file' option
+[Rr]oslyn/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Entity Framework
+*.Designer.cs
+*.edmx
+*.edmx.sql
+*.tt
+*.ttinclude
+
+# Auto-generated files from EF Core database scaffolding
+Generated/
+
+# MSTest
+*.testsettings
+*.vsmdi
+*.vspx
+*.loadtest
+*.testcases
+
+# Visual Studio Code workspace
+*.code-workspace
+
+# Local history for Visual Studio and Visual Studio Code
+.vs/
+.vscode/
+
+# Visual Studio 2019 feature folders
+.vs2019/
+
+# SQL Server files
+*.mdf
+*.ldf
+
+# Azure Pipelines
+.azuredevops/
+
+# Log, package, and database files
+*.log
+*.nupkg
+*.snupkg
+*.sql
+*.pdb
+*.cache
+*.config
+
+# Npm package
+node_modules/
+npm-debug.log*
+
+# Yarn package
+.yarn/
+.yarn-error.log
+
+# JetBrains Rider
+.idea/
+
+# DotNet user secrets
+**/secrets.json
+*.secrets/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Folder config file
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Windows shortcuts
+*.lnk
+
+# Yarn Integrity file
+.yarn-integrity
+
+# Lock files
+package-lock.json
+yarn.lock
+
+# DotNet local NuGet package source
+Nukpgs/
+
+# Visual Studio setup
+.vs/
+
+# Rider Directories
+.idea/
+
+# Rider project files
+*.iml
+
+# Local History
+.localhistory/
+
+# Coverage results
+coverage/
+coverage.info
+
+# Mac files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Other
+output/
