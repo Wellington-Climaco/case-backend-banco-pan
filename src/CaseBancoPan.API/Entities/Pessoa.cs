@@ -23,6 +23,9 @@ public class Pessoa
     
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
     public DateTime UpdatedAt { get; set; }
-    
+
+    public bool VerificarMaioridade(DateTime hoje) => DataNascimento.AddYears(18) <= hoje;
+    public bool ValidarEmail() => Regex.IsMatch(Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+        RegexOptions.IgnoreCase);
     
 }
