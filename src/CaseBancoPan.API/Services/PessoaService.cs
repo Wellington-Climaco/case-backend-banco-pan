@@ -10,18 +10,24 @@ namespace CaseBancoPan.API.Services;
 public class PessoaService : IPessoaService
 {
     private readonly IPessoaRepository _repository;
-    public PessoaService(IPessoaRepository repository)
+    private readonly ILogger<PessoaService> _logger;
+    public PessoaService(IPessoaRepository repository, ILogger<PessoaService> logger)
     {
         _repository = repository;
+        _logger = logger;
     }
-    
+
     public async Task<Result<PessoaResponse>> Cadastrar(CadastrarPessoaRequest request)
     {
         try
         {
-            var dataNascimentoConvertida= DateTime.TryParse(request.dataNascimento, out DateTime dataNascimento);
+            var dataNascimentoConvertida = DateTime.TryParse(request.dataNascimento, out DateTime dataNascimento);
             if (!dataNascimentoConvertida)
-                Result.Ok();
+                Result.Fail("Data de nascimento é inválido");
+
+            var cadastro = await _repository.ObterPorEmail(request.email);
+            if (cadastro is not null)
+                return Result.Fail("Cadastro inválido, email já existente no sistema");
             
             var pessoa = new Pessoa(request.primeiroNome, request.ultimoNome,
                 request.endereco,request.telefone,request.email,dataNascimento);
@@ -33,10 +39,15 @@ public class PessoaService : IPessoaService
             
             return Result.Ok(response);
         }
+        catch(ArgumentException ex)
+        {
+            _logger.LogWarning(ex.ToString());
+            return Result.Fail(ex.Message);
+        }
         catch (Exception ex)
         {
-            Console.WriteLine(ex);
-            throw;
+            _logger.LogError(ex.ToString());
+            return Result.Fail(ex.Message);
         }
     }
 }

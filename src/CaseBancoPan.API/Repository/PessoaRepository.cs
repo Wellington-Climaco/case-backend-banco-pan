@@ -1,6 +1,7 @@
 using CaseBancoPan.API.ContextDb;
 using CaseBancoPan.API.Entities;
 using CaseBancoPan.API.Interface;
+using Microsoft.EntityFrameworkCore;
 
 namespace CaseBancoPan.API.Repository;
 
@@ -18,9 +19,10 @@ public class PessoaRepository : IPessoaRepository
         await _dbContext.SaveChangesAsync();
     }
 
-    public Task<Pessoa> ObterPorEmail(string email)
+    public async Task<Pessoa> ObterPorEmail(string email)
     {
-        throw new NotImplementedException();
+        var result = await _dbContext.Pessoas.AsNoTracking().FirstOrDefaultAsync(p => p.Email == email);
+        return result;
     }
 
     public Task<Pessoa> ObterPorId(Guid id)

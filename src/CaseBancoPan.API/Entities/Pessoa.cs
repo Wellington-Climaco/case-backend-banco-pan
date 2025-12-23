@@ -13,7 +13,7 @@ public class Pessoa
             throw new ArgumentException("telefone inválido");
 
         if (!VerificarMaioridade(DateTime.Now, dataNascimento))
-            throw new ArgumentException("Pessoa deve ser maior de idade");
+            throw new ArgumentException("inválido, pessoa deve ser maior de idade");
         
         if(!ValidarEndereco(endereco))
             throw new ArgumentException("Endereço inválido");

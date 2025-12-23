@@ -22,6 +22,14 @@ public class PessoaController : ControllerBase
     public async Task<IActionResult> Cadastrar(CadastrarPessoaRequest pessoa)
     {
         var result = await _pessoaService.Cadastrar(pessoa);
-        return Created($"/obterById/{result.Value.Id}", result.Value);
+      
+        if(result.IsSuccess)
+            return Created($"/obterById/{result.Value.Id}", result.Value);
+
+        if (result.Errors.First().Message.ToLower().Contains("inválido"))
+            return BadRequest(result.Errors.First().Message);
+
+        return StatusCode(500);
+
     }
 }
