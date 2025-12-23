@@ -13,9 +13,8 @@ public class PessoaTests
         DateTime dataNascimentoConverted = DateTime.Parse(dataNascimento);
         DateTime hoje = new DateTime(2018,01,01);
         
-        Pessoa pessoa = new Pessoa("nome", "endereco", "11957631250", "123456", dataNascimentoConverted);
         //act
-        var result = pessoa.VerificarMaioridade(hoje);
+        var result = Pessoa.VerificarMaioridade(hoje,dataNascimentoConverted);
 
         //assert
         Assert.Equal(expectedResult, result);
@@ -26,13 +25,46 @@ public class PessoaTests
     [InlineData("emailinvalido@teste",false)]
     void DeveVerificarSeEmailEValido(string email,bool expectedResult)
     {
-        //arrange
-        Pessoa pessoa = new Pessoa("nome", "endereco", "11957631250", email, new DateTime(2000,01,01));
-        
         //act
-        var result = pessoa.ValidarEmail();
+        var result = Pessoa.ValidarEmail(email);
 
         //assert
         Assert.Equal(expectedResult,result);
+    }
+
+    [Theory]
+    [InlineData("emailinvalido", "11957631211","Email inválido")]
+    [InlineData("email@teste.com", "123","telefone inválido")]
+    public void DeveLancarExceptionComMensagemDeErroQuandoArgumentosDoConstrutorInvalidos(string email, string telefone,string errorMessage)
+    {
+        // arrange
+        Action act = () =>
+            new Pessoa(
+                "nome",
+                "endereco",
+                telefone,
+                email,
+                new DateTime(2000,01,01) // menor de idade
+            );
+
+        // act & assert
+        var exception = Assert.Throws<ArgumentException>(act);
+        Assert.Equal(errorMessage, exception.Message);
+    }
+
+    [Fact]
+    public void DeveCriarPessoaQuandoDadosSaoValidos()
+    {
+        //arrange
+        var pessoa = new Pessoa(
+            "nome",
+            "endereco",
+            "11957631250",
+            "email@teste.com",
+            DateTime.Now.AddYears(-20)
+        );
+
+        // assert
+        Assert.NotNull(pessoa);
     }
 }
