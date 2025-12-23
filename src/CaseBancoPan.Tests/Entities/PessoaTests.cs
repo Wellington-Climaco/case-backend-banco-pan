@@ -21,12 +21,12 @@ public class PessoaTests
         Assert.Equal(expectedResult, result);
     }
 
-    [Fact]
-    void DeveVerificarSeEmailEValido()
+    [Theory]
+    [InlineData("emailteste@gmail.com",true)]
+    [InlineData("emailinvalido@teste",false)]
+    void DeveVerificarSeEmailEValido(string email,bool expectedResult)
     {
         //arrange
-        bool expectedResult = true;
-        string email = "emailteste@gmail.com";
         Pessoa pessoa = new Pessoa("nome", "endereco", "11957631250", email, new DateTime(2000,01,01));
         
         //act
