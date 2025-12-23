@@ -41,6 +41,7 @@ public class PessoaTests
         Action act = () =>
             new Pessoa(
                 "nome",
+                "sobrenome",
                 "endereco",
                 telefone,
                 email,
@@ -58,6 +59,7 @@ public class PessoaTests
         //arrange
         var pessoa = new Pessoa(
             "nome",
+            "sobrenome",
             "endereco",
             "11957631250",
             "email@teste.com",
