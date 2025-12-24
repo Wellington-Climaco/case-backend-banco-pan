@@ -44,11 +44,14 @@ public class Pessoa
     public static bool ValidarEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase);
     public static bool ValidarTelefone(string telefone) => !string.IsNullOrWhiteSpace(telefone) && telefone.Length == 11 && telefone.All(char.IsDigit);
     public static bool ValidarEndereco(string endereco) => !string.IsNullOrWhiteSpace(endereco);
-
     public static bool ValidarNome(string primeiroNome, string ultimoNome)
     {
         return !string.IsNullOrWhiteSpace(primeiroNome) && primeiroNome.Length >= 3 &&
                !string.IsNullOrWhiteSpace(ultimoNome) && ultimoNome.Length >= 3;
-    } 
+    }
+    public string ObterNomeCompleto()
+    {
+        return $"{PrimeiroNome} {UltimoNome}";
+    }
     
 }
