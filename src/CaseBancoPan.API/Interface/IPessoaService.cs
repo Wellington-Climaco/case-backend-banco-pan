@@ -10,4 +10,5 @@ public interface IPessoaService
     Task<Result<PessoaResponse>> Cadastrar(CadastrarPessoaRequest request);
     Task<Result<PessoaResponse>> ObterPorId(Guid id);
     Task<Result> Remover(Guid id);
+    Task<Result<PessoaResponse>> Atualizar(AtualizarPessoaRequest request);
 }

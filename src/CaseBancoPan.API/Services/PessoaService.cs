@@ -89,4 +89,37 @@ public class PessoaService : IPessoaService
             return Result.Fail(ex.ToString());
         }
     }
+
+    public async Task<Result<PessoaResponse>> Atualizar(AtualizarPessoaRequest request)
+    {
+        try
+        {
+            var pessoa = await _repository.ObterPorId(request.Id);
+            if (pessoa is null)
+                return Result.Fail("registro não encontrado");
+            
+            pessoa.AlterarNome(request.primeiroNome, request.ultimoNome);
+            pessoa.AlterarEndereco(request.endereco);
+            pessoa.AlterarEmail(request.email);
+            pessoa.AlterarTelefone(request.telefone);
+
+            pessoa.SetarUpdatedAt();
+            
+            await _repository.Atualizar(pessoa);
+            
+            var response = new PessoaResponse(pessoa.Id.ToString(),pessoa.ObterNomeCompleto(),
+                pessoa.Email,pessoa.Telefone,pessoa.Endereco,pessoa.DataNascimento.ToString("dd/MM/yyyy"));
+            return Result.Ok(response);
+        }
+        catch(ArgumentException ex)
+        {
+            _logger.LogWarning(ex.ToString());
+            return Result.Fail(ex.Message);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("erro inesperado: {Exception}", ex.ToString());
+            return Result.Fail(ex.ToString());
+        }
+    }
 }
