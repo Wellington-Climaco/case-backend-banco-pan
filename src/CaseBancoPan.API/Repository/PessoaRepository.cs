@@ -25,9 +25,10 @@ public class PessoaRepository : IPessoaRepository
         return result;
     }
 
-    public Task<Pessoa> ObterPorId(Guid id)
+    public async Task<Pessoa> ObterPorId(Guid id)
     {
-        throw new NotImplementedException();
+        var result = await _dbContext.Pessoas.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+        return result;
     }
 
 
