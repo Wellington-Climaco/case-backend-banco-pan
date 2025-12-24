@@ -1,3 +1,4 @@
+using CaseBancoPan.API.Entities;
 using CaseBancoPan.API.Requests.PessoaRequests;
 using CaseBancoPan.API.Responses.PessoaResponses;
 using FluentResults;
@@ -8,4 +9,5 @@ public interface IPessoaService
 {
     Task<Result<PessoaResponse>> Cadastrar(CadastrarPessoaRequest request);
     Task<Result<PessoaResponse>> ObterPorId(Guid id);
+    Task<Result> Remover(Guid id);
 }

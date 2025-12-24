@@ -70,4 +70,23 @@ public class PessoaService : IPessoaService
             return Result.Fail(ex.ToString());
         }
     }
+
+    public async Task<Result> Remover(Guid id)
+    {
+        try
+        {
+            var pessoa = await _repository.ObterPorId(id);
+            if (pessoa is null)
+                return Result.Fail("Registro não encontrado");
+
+            await _repository.Remover(pessoa);
+            
+            return Result.Ok();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("erro inesperado: {Exception}", ex.ToString());
+            return Result.Fail(ex.ToString());
+        }
+    }
 }
