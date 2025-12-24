@@ -30,11 +30,11 @@ public class Pessoa
     }
 
     public Guid Id { get; private set; } = Guid.NewGuid();
-    public string PrimeiroNome { get; set; }
-    public string UltimoNome { get; set; }
-    public string Endereco { get; set; }
-    public string Email { get; set; }
-    public string Telefone { get; set; }
+    public string PrimeiroNome { get; private set; }
+    public string UltimoNome { get; private set; }
+    public string Endereco { get; private set; }
+    public string Email { get; private set; }
+    public string Telefone { get; private set; }
     public DateTime DataNascimento { get; private set; }
     
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
@@ -49,9 +49,38 @@ public class Pessoa
         return !string.IsNullOrWhiteSpace(primeiroNome) && primeiroNome.Length >= 3 &&
                !string.IsNullOrWhiteSpace(ultimoNome) && ultimoNome.Length >= 3;
     }
+    
     public string ObterNomeCompleto()
     {
         return $"{PrimeiroNome} {UltimoNome}";
+    }
+    public void SetarUpdatedAt() => UpdatedAt = DateTime.Now;
+    public void AlterarNome(string primeiroNome, string ultimoNome)
+    {
+        if(!ValidarNome(primeiroNome,ultimoNome))
+            throw new ArgumentException("Nome inválido");
+        
+        PrimeiroNome = primeiroNome;
+        UltimoNome = ultimoNome;
+    }
+    public void AlterarEndereco(string endereco)
+    {
+        if(!ValidarEndereco(endereco))
+            throw new ArgumentException("Endereço inválido");
+        Endereco = endereco;
+    }
+    public void AlterarTelefone(string telefone)
+    {
+        if(!ValidarTelefone(telefone))   
+            throw new ArgumentException("telefone inválido");
+        
+        Telefone = telefone;
+    }
+    public void AlterarEmail(string email)
+    { 
+        if (!ValidarEmail(email))
+            throw new ArgumentException("Email inválido");
+        Email = email;
     }
     
 }
