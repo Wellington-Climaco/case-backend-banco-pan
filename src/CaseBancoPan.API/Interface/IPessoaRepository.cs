@@ -8,4 +8,5 @@ public interface IPessoaRepository
     Task<Pessoa> ObterPorId(Guid id);
     Task<Pessoa> ObterPorEmail(string email);
     Task Remover(Pessoa pessoa);
+    Task Atualizar(Pessoa pessoa);
 }

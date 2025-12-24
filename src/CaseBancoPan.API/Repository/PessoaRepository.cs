@@ -37,4 +37,9 @@ public class PessoaRepository : IPessoaRepository
         await _dbContext.SaveChangesAsync();
     }
 
+    public async Task Atualizar(Pessoa pessoa)
+    {
+        _dbContext.Pessoas.Update(pessoa);
+        await _dbContext.SaveChangesAsync();
+    }
 }
