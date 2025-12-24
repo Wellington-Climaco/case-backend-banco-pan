@@ -19,9 +19,9 @@ public class PessoaController : ControllerBase
     
     [HttpPost]
     [Route("/cadastrar")]
-    public async Task<IActionResult> Cadastrar(CadastrarPessoaRequest pessoa)
+    public async Task<IActionResult> Cadastrar(CadastrarPessoaRequest request)
     {
-        var result = await _pessoaService.Cadastrar(pessoa);
+        var result = await _pessoaService.Cadastrar(request);
       
         if(result.IsSuccess)
             return Created($"/obterById/{result.Value.Id}", result.Value);
@@ -56,6 +56,24 @@ public class PessoaController : ControllerBase
         
         if (result.Errors.First().Message.ToLower().Contains("não encontrado"))
             return NotFound(result.Errors.First().Message);
+        
+        return StatusCode(500);
+    }
+
+    [HttpPut]
+    [Route("/atualizar/")]
+    public async Task<IActionResult> Atualizar(AtualizarPessoaRequest request)
+    {
+        var result = await _pessoaService.Atualizar(request);
+        
+        if (result.IsSuccess)
+            return Ok(result.Value);
+        
+        if (result.Errors.First().Message.ToLower().Contains("não encontrado"))
+            return NotFound(result.Errors.First().Message);
+        
+        if (result.Errors.First().Message.ToLower().Contains("inválido"))
+            return BadRequest(result.Errors.First().Message);
         
         return StatusCode(500);
     }
