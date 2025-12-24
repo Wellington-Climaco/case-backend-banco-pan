@@ -45,4 +45,18 @@ public class PessoaController : ControllerBase
         
         return StatusCode(500);
     }
+    
+    [HttpDelete]
+    [Route("/remover/{id}")]
+    public async Task<IActionResult> RemoverPorId(Guid id)
+    {
+        var result = await _pessoaService.Remover(id);
+        if (result.IsSuccess)
+            return Ok();
+        
+        if (result.Errors.First().Message.ToLower().Contains("não encontrado"))
+            return NotFound(result.Errors.First().Message);
+        
+        return StatusCode(500);
+    }
 }
