@@ -30,6 +30,11 @@ public class PessoaRepository : IPessoaRepository
         var result = await _dbContext.Pessoas.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
         return result;
     }
-
+    
+    public async Task Remover(Pessoa pessoa)
+    {
+        _dbContext.Pessoas.Remove(pessoa);
+        await _dbContext.SaveChangesAsync();
+    }
 
 }
