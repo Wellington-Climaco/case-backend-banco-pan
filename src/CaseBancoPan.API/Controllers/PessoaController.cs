@@ -26,10 +26,23 @@ public class PessoaController : ControllerBase
         if(result.IsSuccess)
             return Created($"/obterById/{result.Value.Id}", result.Value);
 
-        if (result.Errors.First().Message.ToLower().Contains("inv�lido"))
+        if (result.Errors.First().Message.ToLower().Contains("inválido"))
             return BadRequest(result.Errors.First().Message);
 
         return StatusCode(500);
+    }
 
+    [HttpGet]
+    [Route("/obterPorId/{id}")]
+    public async Task<IActionResult> ObterPorId([FromRoute] Guid id)
+    {
+        var result = await _pessoaService.ObterPorId(id);
+        if(result.IsSuccess)
+            return Ok(result.Value);
+        
+        if (result.Errors.First().Message.ToLower().Contains("não encontrado"))
+            return NotFound(result.Errors.First().Message);
+        
+        return StatusCode(500);
     }
 }
