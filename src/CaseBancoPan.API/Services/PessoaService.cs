@@ -34,7 +34,7 @@ public class PessoaService : IPessoaService
         
             await _repository.Save(pessoa);
 
-            var response = new PessoaResponse(pessoa.Id.ToString(),$"{pessoa.PrimeiroNome } {pessoa.UltimoNome}",
+            var response = new PessoaResponse(pessoa.Id.ToString(),pessoa.ObterNomeCompleto(),
                 pessoa.Email,pessoa.Telefone,pessoa.Endereco,pessoa.DataNascimento.ToString("dd/MM/yyyy"));
             
             return Result.Ok(response);
@@ -48,6 +48,26 @@ public class PessoaService : IPessoaService
         {
             _logger.LogError(ex.ToString());
             return Result.Fail(ex.Message);
+        }
+    }
+
+    public async Task<Result<PessoaResponse>> ObterPorId(Guid id)
+    {
+        try
+        {
+            var pessoa = await _repository.ObterPorId(id);
+            if (pessoa is null)
+                return Result.Fail("Registro não encontrado");
+            
+            var response = new PessoaResponse(pessoa.Id.ToString(),pessoa.ObterNomeCompleto(),
+                pessoa.Email,pessoa.Telefone,pessoa.Endereco,pessoa.DataNascimento.ToString("dd/MM/yyyy"));
+
+            return Result.Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError("erro inesperado: {Exception}", ex.ToString());
+            return Result.Fail(ex.ToString());
         }
     }
 }

@@ -7,4 +7,5 @@ namespace CaseBancoPan.API.Interface;
 public interface IPessoaService
 {
     Task<Result<PessoaResponse>> Cadastrar(CadastrarPessoaRequest request);
+    Task<Result<PessoaResponse>> ObterPorId(Guid id);
 }
