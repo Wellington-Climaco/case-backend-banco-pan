@@ -23,7 +23,7 @@ public class PessoaService : IPessoaService
         {
             var dataNascimentoConvertida = DateTime.TryParse(request.dataNascimento, out DateTime dataNascimento);
             if (!dataNascimentoConvertida)
-                Result.Fail("Data de nascimento é inválido");
+                return Result.Fail("Data de nascimento é inválido");
 
             var cadastro = await _repository.ObterPorEmail(request.email);
             if (cadastro is not null)
