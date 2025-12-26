@@ -5,9 +5,11 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DC3A39A2-6649-49BC-AB35-3FA27960FE4F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseBancoPan.API", "src\CaseBancoPan.API\CaseBancoPan.API.csproj", "{4EFAA975-18A6-403A-B3FE-49A93B85D4A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaseBancoPan.API", "src\CaseBancoPan.API\CaseBancoPan.API.csproj", "{4EFAA975-18A6-403A-B3FE-49A93B85D4A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CaseBancoPan.Tests", "src\CaseBancoPan.Tests\CaseBancoPan.Tests.csproj", "{6F590EBC-48BF-4E31-A975-EDFE402FD3C7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CaseBancoPan.Tests", "src\CaseBancoPan.Tests\CaseBancoPan.Tests.csproj", "{6F590EBC-48BF-4E31-A975-EDFE402FD3C7}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{F122577A-0F56-4C83-B519-DA5820E66241}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{6F590EBC-48BF-4E31-A975-EDFE402FD3C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F590EBC-48BF-4E31-A975-EDFE402FD3C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F590EBC-48BF-4E31-A975-EDFE402FD3C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F122577A-0F56-4C83-B519-DA5820E66241}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F122577A-0F56-4C83-B519-DA5820E66241}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F122577A-0F56-4C83-B519-DA5820E66241}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F122577A-0F56-4C83-B519-DA5820E66241}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

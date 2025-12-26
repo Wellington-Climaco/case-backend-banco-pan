@@ -27,14 +27,14 @@ public class PessoaController : ControllerBase
         var validation = await _cadastrarRequestValidator.ValidateAsync(request);
         if(!validation.IsValid)
             return BadRequest(validation.Errors.Select(x=>x.ErrorMessage));
-        
+
         var result = await _pessoaService.Cadastrar(request);
-      
+
         if(result.IsSuccess)
             return Created($"/obterById/{result.Value.Id}", result.Value);
 
         if (result.Errors.First().Message.ToLower().Contains("inválido"))
-            return BadRequest(result.Errors.First().Message);
+                return BadRequest(result.Errors.First().Message);        
 
         return StatusCode(500);
     }

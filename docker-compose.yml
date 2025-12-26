@@ -1,0 +1,29 @@
+version: '3.4'
+
+services:
+  casebancopan.api:
+    image: ${DOCKER_REGISTRY-}casebancopanapi
+    container_name: casebancopan.api
+    build:
+      context: .
+      dockerfile: src/CaseBancoPan.API/Dockerfile
+    depends_on:
+      - casebancopan.database
+    ports:
+      - "8080:8080"
+    environment:
+      ConnectionStrings__DefaultConnection: >
+        Server=casebancopan.database,1433;
+        Database=CadastroPessoas;
+        User ID=sa;
+        Password=1q2w3e4r@#$;
+        TrustServerCertificate=True
+
+  casebancopan.database:
+    image: mcr.microsoft.com/mssql/server:latest
+    container_name: casebancopan.database
+    environment:
+      - MSSQL_SA_PASSWORD=1q2w3e4r@#$
+      - ACCEPT_EULA=Y
+    ports:
+      - "1433:1433"
