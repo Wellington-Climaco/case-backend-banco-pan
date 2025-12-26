@@ -28,14 +28,12 @@ public class PessoaService : IPessoaService
             var cadastro = await _repository.ObterPorEmail(request.email);
             if (cadastro is not null)
                 return Result.Fail("Cadastro inválido, email já existente no sistema");
-            
-            var pessoa = new Pessoa(request.primeiroNome, request.ultimoNome,
-                request.endereco,request.telefone,request.email,dataNascimento);
+
+            var pessoa = request.MapearRequestParaEntity(dataNascimento);
         
             await _repository.Save(pessoa);
 
-            var response = new PessoaResponse(pessoa.Id.ToString(),pessoa.ObterNomeCompleto(),
-                pessoa.Email,pessoa.Telefone,pessoa.Endereco,pessoa.DataNascimento.ToString("dd/MM/yyyy"));
+            var response = pessoa.MapearEntityParaResponse();
             
             return Result.Ok(response);
         }
@@ -106,9 +104,8 @@ public class PessoaService : IPessoaService
             pessoa.SetarUpdatedAt();
             
             await _repository.Atualizar(pessoa);
-            
-            var response = new PessoaResponse(pessoa.Id.ToString(),pessoa.ObterNomeCompleto(),
-                pessoa.Email,pessoa.Telefone,pessoa.Endereco,pessoa.DataNascimento.ToString("dd/MM/yyyy"));
+
+            var response = pessoa.MapearEntityParaResponse();
             return Result.Ok(response);
         }
         catch(ArgumentException ex)
