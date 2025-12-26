@@ -38,7 +38,7 @@ public class Pessoa
     public DateTime DataNascimento { get; private set; }
     
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
-    public DateTime? UpdatedAt { get; set; }
+    public DateTime? UpdatedAt { get; private set; }
 
     public static bool VerificarMaioridade(DateTime hoje,DateTime dataNascimento) => dataNascimento.AddYears(18) <= hoje;
     public static bool ValidarEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase);
