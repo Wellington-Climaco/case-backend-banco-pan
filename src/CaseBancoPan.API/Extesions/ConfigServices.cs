@@ -32,13 +32,13 @@ public static class ConfigServices
         return services;
     }
 
-    public static IApplicationBuilder ApplyMigration(this IApplicationBuilder app)
+    public async static Task ApplyMigration(this IApplicationBuilder app)
     {
         using var scope = app.ApplicationServices.CreateScope();
         using DatabaseContext dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
         Console.WriteLine($"qtd migrations: {dbContext.Database.GetMigrations().Count()}");
-        dbContext.Database.EnsureCreated();
 
-        return app;
+        await dbContext.Database.EnsureDeletedAsync();
+        await dbContext.Database.EnsureCreatedAsync();
     }
 }
