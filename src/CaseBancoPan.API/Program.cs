@@ -26,6 +26,7 @@ namespace CaseBancoPan.API
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
+                app.ApplyMigration();
             }
 
             app.UseHttpsRedirection();

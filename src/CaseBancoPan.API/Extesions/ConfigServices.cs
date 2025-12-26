@@ -31,4 +31,13 @@ public static class ConfigServices
         services.AddValidatorsFromAssemblyContaining<CadastrarPessoaRequestValidator>();
         return services;
     }
+
+    public static IApplicationBuilder ApplyMigration(this IApplicationBuilder app)
+    {
+        using var scope = app.ApplicationServices.CreateScope();
+        using DatabaseContext dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+        dbContext.Database.Migrate();
+
+        return app;
+    }
 }
