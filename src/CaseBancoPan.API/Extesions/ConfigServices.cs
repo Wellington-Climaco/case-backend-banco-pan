@@ -36,6 +36,7 @@ public static class ConfigServices
     {
         using var scope = app.ApplicationServices.CreateScope();
         using DatabaseContext dbContext = scope.ServiceProvider.GetRequiredService<DatabaseContext>();
+        Console.WriteLine($"qtd migrations: {dbContext.Database.GetMigrations().Count()}");
         dbContext.Database.Migrate();
 
         return app;

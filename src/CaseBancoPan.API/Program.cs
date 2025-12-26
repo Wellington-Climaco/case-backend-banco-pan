@@ -25,10 +25,10 @@ namespace CaseBancoPan.API
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerUI();                
                 app.ApplyMigration();
             }
-
+            
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
