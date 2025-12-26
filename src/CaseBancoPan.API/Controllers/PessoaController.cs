@@ -1,7 +1,6 @@
-using CaseBancoPan.API.Entities;
 using CaseBancoPan.API.Interface;
 using CaseBancoPan.API.Requests.PessoaRequests;
-using FluentResults;
+using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CaseBancoPan.API.Controllers;
@@ -11,16 +10,24 @@ namespace CaseBancoPan.API.Controllers;
 public class PessoaController : ControllerBase
 {
     private readonly IPessoaService _pessoaService;
+    private readonly IValidator<CadastrarPessoaRequest> _cadastrarRequestValidator;
+    private readonly IValidator<AtualizarPessoaRequest> _atualizarRequestValidator;
 
-    public PessoaController(IPessoaService pessoaService)
+    public PessoaController(IPessoaService pessoaService,IValidator<CadastrarPessoaRequest> cadastrarRequestValidator,IValidator<AtualizarPessoaRequest> atualizarRequestValidator)
     {
         _pessoaService = pessoaService;
+        _cadastrarRequestValidator = cadastrarRequestValidator;
+        _atualizarRequestValidator = atualizarRequestValidator;
     }
     
     [HttpPost]
     [Route("/cadastrar")]
     public async Task<IActionResult> Cadastrar(CadastrarPessoaRequest request)
     {
+        var validation = await _cadastrarRequestValidator.ValidateAsync(request);
+        if(!validation.IsValid)
+            return BadRequest(validation.Errors.Select(x=>x.ErrorMessage));
+        
         var result = await _pessoaService.Cadastrar(request);
       
         if(result.IsSuccess)
@@ -64,6 +71,10 @@ public class PessoaController : ControllerBase
     [Route("/atualizar/")]
     public async Task<IActionResult> Atualizar(AtualizarPessoaRequest request)
     {
+        var validation = await _atualizarRequestValidator.ValidateAsync(request);
+        if(!validation.IsValid)
+            return BadRequest(validation.Errors.Select(x => x.ErrorMessage));
+        
         var result = await _pessoaService.Atualizar(request);
         
         if (result.IsSuccess)

@@ -2,6 +2,8 @@ using CaseBancoPan.API.ContextDb;
 using CaseBancoPan.API.Interface;
 using CaseBancoPan.API.Repository;
 using CaseBancoPan.API.Services;
+using CaseBancoPan.API.Validators;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 
 namespace CaseBancoPan.API.Extesions;
@@ -21,6 +23,12 @@ public static class ConfigServices
         services.AddScoped<IPessoaRepository, PessoaRepository>();
         services.AddScoped<IPessoaService, PessoaService>();
 
+        return services;
+    }
+
+    public static IServiceCollection ConfigFluentValidation(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssemblyContaining<CadastrarPessoaRequestValidator>();
         return services;
     }
 }
