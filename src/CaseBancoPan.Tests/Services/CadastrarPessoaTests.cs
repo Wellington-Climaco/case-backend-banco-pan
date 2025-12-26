@@ -22,7 +22,7 @@ public class CadastrarPessoaTests
     {
        //arrange
        var request = new CadastrarPessoaRequest("primeiroNome", "segundoNome", "rua B", "11970707070",
-           "email@email.com", "18/03/2003");
+           "email@email.com", new DateTime(2003,03,18));
 
        _mockRepository.Setup(x => x.ObterPorEmail("email@email.com")).ReturnsAsync(null as Pessoa);
        
@@ -39,30 +39,12 @@ public class CadastrarPessoaTests
         //arrange
         string expectedErrorMessage = "Cadastro inválido, email já existente no sistema";
         var request = new CadastrarPessoaRequest("primeiroNome", "segundoNome", "rua B", "11970707070",
-            "email@email.com", "18/03/2003");
+            "email@email.com", new DateTime(2003, 03, 18));
         
         var pessoa = new Pessoa("primeiroNome", "segundoNome", "rua B", "11970707070",
             "email@email.com", new DateTime(2003, 03, 18));
         
         _mockRepository.Setup(x => x.ObterPorEmail("email@email.com")).ReturnsAsync(pessoa);
-       
-        //act
-        var result = await _pessoaService.Cadastrar(request);
-
-        //assert
-        Assert.False(result.IsSuccess);
-        Assert.Equal(expectedErrorMessage,result.Errors.First().Message);
-    }
-
-    [Fact]
-    public async Task DeveRetornarErroQuandoDataNascimentoInvalida()
-    {
-        //arrange
-        string expectedErrorMessage = "Data de nascimento é inválido";
-        var request = new CadastrarPessoaRequest("primeiroNome", "segundoNome", "rua B", "11970707070",
-            "email@email.com", "dataInvalida");
-        
-        _mockRepository.Setup(x => x.ObterPorEmail("email@email.com")).ReturnsAsync(null as Pessoa);
        
         //act
         var result = await _pessoaService.Cadastrar(request);

@@ -4,6 +4,7 @@ using CaseBancoPan.API.Interface;
 using CaseBancoPan.API.Requests.PessoaRequests;
 using CaseBancoPan.API.Responses.PessoaResponses;
 using FluentResults;
+using System.Globalization;
 
 namespace CaseBancoPan.API.Services;
 
@@ -21,15 +22,11 @@ public class PessoaService : IPessoaService
     {
         try
         {
-            var dataNascimentoConvertida = DateTime.TryParse(request.dataNascimento, out DateTime dataNascimento);
-            if (!dataNascimentoConvertida)
-                return Result.Fail("Data de nascimento é inválido");
-
             var cadastro = await _repository.ObterPorEmail(request.email);
             if (cadastro is not null)
                 return Result.Fail("Cadastro inválido, email já existente no sistema");
 
-            var pessoa = request.MapearRequestParaEntity(dataNascimento);
+            var pessoa = request.MapearRequestParaEntity();
         
             await _repository.Save(pessoa);
 
