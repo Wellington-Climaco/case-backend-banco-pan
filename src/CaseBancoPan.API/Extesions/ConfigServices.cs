@@ -1,4 +1,5 @@
 using CaseBancoPan.API.ContextDb;
+using CaseBancoPan.API.Entities;
 using CaseBancoPan.API.Interface;
 using CaseBancoPan.API.Repository;
 using CaseBancoPan.API.Services;
@@ -39,6 +40,18 @@ public static class ConfigServices
         Console.WriteLine($"qtd migrations: {dbContext.Database.GetMigrations().Count()}");
 
         await dbContext.Database.EnsureDeletedAsync();
+        Thread.Sleep(5000);
         await dbContext.Database.EnsureCreatedAsync();
+
+
+        Pessoa[] pessoa =
+        {
+            new Pessoa("jose", "santos", "rua A", "11970707070", $"email1@email.com", new DateTime(2000, 01, 01)),
+            new Pessoa("ana", "souza", "rua B", "11970707070", $"email2@email.com", new DateTime(2000, 01, 01)),
+            new Pessoa("maria julia", "cardoso", "rua C", "11970707070", $"email3@email.com", new DateTime(2000, 01, 01)),
+            new Pessoa("felipe", "silva", "rua D", "11970707070", $"email4@email.com", new DateTime(2000, 01, 01))
+        };
+        dbContext.Pessoas.AddRange(pessoa);
+        dbContext.SaveChanges();
     }
 }
