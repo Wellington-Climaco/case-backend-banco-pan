@@ -7,19 +7,19 @@ public class Pessoa
     public Pessoa(string primeiroNome,string ultimoNome, string endereco, string telefone,string email, DateTime dataNascimento)
     {
         if (!ValidarEmail(email))
-            throw new ArgumentException("Email inválido");
+            throw new ArgumentException("Email invalido");
                 
         if(!ValidarTelefone(telefone))   
-            throw new ArgumentException("telefone inválido");
+            throw new ArgumentException("telefone invalido");
 
         if (!VerificarMaioridade(DateTime.Now, dataNascimento))
-            throw new ArgumentException("inválido, pessoa deve ser maior de idade");
+            throw new ArgumentException("invalido, pessoa deve ser maior de idade");
         
         if(!ValidarEndereco(endereco))
-            throw new ArgumentException("Endereço inválido");
+            throw new ArgumentException("Endereço invalido");
         
         if(!ValidarNome(primeiroNome,ultimoNome))
-            throw new ArgumentException("Nome inválido");
+            throw new ArgumentException("Nome invalido");
         
         PrimeiroNome = primeiroNome;
         UltimoNome = ultimoNome;
@@ -40,11 +40,11 @@ public class Pessoa
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
     public DateTime? UpdatedAt { get; private set; }
 
-    public static bool VerificarMaioridade(DateTime hoje,DateTime dataNascimento) => dataNascimento.AddYears(18) <= hoje;
-    public static bool ValidarEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase);
-    public static bool ValidarTelefone(string telefone) => !string.IsNullOrWhiteSpace(telefone) && telefone.Length == 11 && telefone.All(char.IsDigit);
-    public static bool ValidarEndereco(string endereco) => !string.IsNullOrWhiteSpace(endereco);
-    public static bool ValidarNome(string primeiroNome, string ultimoNome)
+    private static bool VerificarMaioridade(DateTime hoje,DateTime dataNascimento) => dataNascimento.AddYears(18) <= hoje;
+    private static bool ValidarEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase);
+    private static bool ValidarTelefone(string telefone) => !string.IsNullOrWhiteSpace(telefone) && telefone.Length == 11 && telefone.All(char.IsDigit);
+    private static bool ValidarEndereco(string endereco) => !string.IsNullOrWhiteSpace(endereco);
+    private static bool ValidarNome(string primeiroNome, string ultimoNome)
     {
         return !string.IsNullOrWhiteSpace(primeiroNome) && primeiroNome.Length >= 3 &&
                !string.IsNullOrWhiteSpace(ultimoNome) && ultimoNome.Length >= 3;
@@ -58,7 +58,7 @@ public class Pessoa
     public void AlterarNome(string primeiroNome, string ultimoNome)
     {
         if(!ValidarNome(primeiroNome,ultimoNome))
-            throw new ArgumentException("Nome inválido");
+            throw new ArgumentException("Nome invalido");
         
         PrimeiroNome = primeiroNome;
         UltimoNome = ultimoNome;
@@ -66,20 +66,20 @@ public class Pessoa
     public void AlterarEndereco(string endereco)
     {
         if(!ValidarEndereco(endereco))
-            throw new ArgumentException("Endereço inválido");
+            throw new ArgumentException("Endereço invalido");
         Endereco = endereco;
     }
     public void AlterarTelefone(string telefone)
     {
         if(!ValidarTelefone(telefone))   
-            throw new ArgumentException("telefone inválido");
+            throw new ArgumentException("telefone invalido");
         
         Telefone = telefone;
     }
     public void AlterarEmail(string email)
     { 
         if (!ValidarEmail(email))
-            throw new ArgumentException("Email inválido");
+            throw new ArgumentException("Email invalido");
         Email = email;
     }
     
