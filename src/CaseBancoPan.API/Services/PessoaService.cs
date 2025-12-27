@@ -117,7 +117,7 @@ public class PessoaService : IPessoaService
         }
     }
 
-    public async Task<Result<ObterTodosRegistrosResponse>> ObterTodosPaginado(int pagina,int tamanhoPagina = 5)
+    public async Task<Result<ObterTodosRegistrosResponse>> ObterTodosPaginado(int pagina = 1, int tamanhoPagina = 5)
     {
         try
         {

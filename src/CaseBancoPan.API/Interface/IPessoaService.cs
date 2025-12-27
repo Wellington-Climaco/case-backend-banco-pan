@@ -11,5 +11,5 @@ public interface IPessoaService
     Task<Result<PessoaResponse>> ObterPorId(Guid id);
     Task<Result> Remover(Guid id);
     Task<Result<PessoaResponse>> Atualizar(AtualizarPessoaRequest request);
-    Task<Result<ObterTodosRegistrosResponse>> ObterTodosPaginado(int pagina,int tamanhoPagina = 5);
+    Task<Result<ObterTodosRegistrosResponse>> ObterTodosPaginado(int pagina = 1,int tamanhoPagina = 5);
 }
