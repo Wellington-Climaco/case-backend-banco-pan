@@ -28,7 +28,7 @@ public class PessoaController : ControllerBase
         if(!validation.IsValid)
             return BadRequest(validation.Errors.Select(x=>x.ErrorMessage));
 
-        var result = await _pessoaService.Cadastrar(request);
+            var result = await _pessoaService.Cadastrar(request);
 
         if(result.IsSuccess)
             return Created($"/obterById/{result.Value.Id}", result.Value);
@@ -86,6 +86,20 @@ public class PessoaController : ControllerBase
         if (result.Errors.First().Message.ToLower().Contains("inválido"))
             return BadRequest(result.Errors.First().Message);
         
+        return StatusCode(500);
+    }
+
+    [HttpGet("/obterTodos/pagina/{pagina:int}")]
+    public async Task<IActionResult> ObterTodos([FromRoute] int pagina)
+    {
+        var result = await _pessoaService.ObterTodosPaginado(pagina);
+
+        if (result.IsSuccess)
+            return Ok(result.Value);
+
+        if (result.Errors.First().Message.ToLower().Contains("nenhum registro"))
+            return NotFound(result.Errors.First().Message);
+
         return StatusCode(500);
     }
 }
