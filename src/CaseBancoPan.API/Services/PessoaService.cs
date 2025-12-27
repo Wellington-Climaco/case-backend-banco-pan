@@ -24,7 +24,7 @@ public class PessoaService : IPessoaService
         {
             var cadastro = await _repository.ObterPorEmail(request.email);
             if (cadastro is not null)
-                return Result.Fail("Cadastro inválido, email já existente no sistema");
+                return Result.Fail("Cadastro invalido, email já existente no sistema");
 
             var pessoa = request.MapearRequestParaEntity();
 
@@ -52,7 +52,7 @@ public class PessoaService : IPessoaService
         {
             var pessoa = await _repository.ObterPorId(id);
             if (pessoa is null)
-                return Result.Fail("Registro não encontrado");
+                return Result.Fail("Registro nao encontrado");
             
             var response = new PessoaResponse(pessoa.Id.ToString(),pessoa.ObterNomeCompleto(),
                 pessoa.Email,pessoa.Telefone,pessoa.Endereco,pessoa.DataNascimento.ToString("dd/MM/yyyy"));
@@ -72,7 +72,7 @@ public class PessoaService : IPessoaService
         {
             var pessoa = await _repository.ObterPorId(id);
             if (pessoa is null)
-                return Result.Fail("Registro não encontrado");
+                return Result.Fail("Registro nao encontrado");
 
             await _repository.Remover(pessoa);
             
@@ -91,7 +91,7 @@ public class PessoaService : IPessoaService
         {
             var pessoa = await _repository.ObterPorId(request.Id);
             if (pessoa is null)
-                return Result.Fail("registro não encontrado");
+                return Result.Fail("registro nao encontrado");
             
             pessoa.AlterarNome(request.primeiroNome, request.ultimoNome);
             pessoa.AlterarEndereco(request.endereco);

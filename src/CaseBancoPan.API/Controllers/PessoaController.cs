@@ -33,7 +33,7 @@ public class PessoaController : ControllerBase
         if(result.IsSuccess)
             return Created($"/obterById/{result.Value.Id}", result.Value);
 
-        if (result.Errors.First().Message.ToLower().Contains("inválido"))
+        if (result.Errors.First().Message.Contains("invalido",StringComparison.OrdinalIgnoreCase))
                 return BadRequest(result.Errors.First().Message);        
 
         return StatusCode(500);
@@ -47,7 +47,7 @@ public class PessoaController : ControllerBase
         if(result.IsSuccess)
             return Ok(result.Value);
         
-        if (result.Errors.First().Message.ToLower().Contains("não encontrado"))
+        if (result.Errors.First().Message.Contains("nao encontrado",StringComparison.OrdinalIgnoreCase))
             return NotFound(result.Errors.First().Message);
         
         return StatusCode(500);
@@ -61,7 +61,7 @@ public class PessoaController : ControllerBase
         if (result.IsSuccess)
             return Ok();
         
-        if (result.Errors.First().Message.ToLower().Contains("não encontrado"))
+        if (result.Errors.First().Message.Contains("nao encontrado",StringComparison.OrdinalIgnoreCase))
             return NotFound(result.Errors.First().Message);
         
         return StatusCode(500);
@@ -80,10 +80,10 @@ public class PessoaController : ControllerBase
         if (result.IsSuccess)
             return Ok(result.Value);
         
-        if (result.Errors.First().Message.ToLower().Contains("não encontrado"))
+        if (result.Errors.First().Message.Contains("nao encontrado", StringComparison.OrdinalIgnoreCase))
             return NotFound(result.Errors.First().Message);
         
-        if (result.Errors.First().Message.ToLower().Contains("inválido"))
+        if (result.Errors.First().Message.Contains("invalido", StringComparison.OrdinalIgnoreCase))
             return BadRequest(result.Errors.First().Message);
         
         return StatusCode(500);
@@ -97,7 +97,7 @@ public class PessoaController : ControllerBase
         if (result.IsSuccess)
             return Ok(result.Value);
 
-        if (result.Errors.First().Message.ToLower().Contains("nenhum registro"))
+        if (result.Errors.First().Message.Contains("nenhum registro", StringComparison.OrdinalIgnoreCase))
             return NotFound(result.Errors.First().Message);
 
         return StatusCode(500);
