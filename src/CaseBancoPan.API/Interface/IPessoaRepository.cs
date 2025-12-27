@@ -9,4 +9,5 @@ public interface IPessoaRepository
     Task<Pessoa> ObterPorEmail(string email);
     Task Remover(Pessoa pessoa);
     Task Atualizar(Pessoa pessoa);
+    Task<(List<Pessoa> pessoas,int totalRegistros)> ObterTodos(int tamanho, int pagina = 0);
 }

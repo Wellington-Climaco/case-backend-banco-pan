@@ -27,9 +27,9 @@ public class PessoaService : IPessoaService
                 return Result.Fail("Cadastro inválido, email já existente no sistema");
 
             var pessoa = request.MapearRequestParaEntity();
-        
-            await _repository.Save(pessoa);
 
+                await _repository.Save(pessoa);
+           
             var response = pessoa.MapearEntityParaResponse();
             
             return Result.Ok(response);
@@ -115,5 +115,30 @@ public class PessoaService : IPessoaService
             _logger.LogError("erro inesperado: {Exception}", ex.ToString());
             return Result.Fail(ex.ToString());
         }
+    }
+
+    public async Task<Result<ObterTodosRegistrosResponse>> ObterTodosPaginado(int pagina,int tamanhoPagina = 5)
+    {
+        try
+        {
+            var result = await _repository.ObterTodos(tamanhoPagina,pagina);
+            if (result.pessoas.Count == 0)
+                return Result.Fail("Nenhum registro encontrado");
+
+            var registros = result.pessoas.Select(x => x.MapearEntityParaResponse());
+
+            int totalPaginas = (int)Math.Ceiling((double)result.totalRegistros / tamanhoPagina);
+            bool possuiPaginaAnterior = pagina > 1;
+            bool possuiPaginaSeguinte = pagina < totalPaginas;
+
+            var response = new ObterTodosRegistrosResponse(pagina, tamanhoPagina, totalPaginas,result.totalRegistros,possuiPaginaAnterior,possuiPaginaSeguinte,registros);
+
+            return Result.Ok(response);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex.ToString());
+            return Result.Fail(ex.ToString());
+        }        
     }
 }

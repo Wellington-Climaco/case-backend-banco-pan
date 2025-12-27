@@ -42,4 +42,12 @@ public class PessoaRepository : IPessoaRepository
         _dbContext.Pessoas.Update(pessoa);
         await _dbContext.SaveChangesAsync();
     }
+
+    public async Task<(List<Pessoa> pessoas, int totalRegistros)> ObterTodos(int tamanho, int pagina = 0)
+    {
+        int totalRegistros = await _dbContext.Pessoas.CountAsync();
+        var result = await _dbContext.Pessoas.AsNoTracking().Skip((pagina - 1) * tamanho).Take(tamanho).ToListAsync();
+
+        return (result, totalRegistros);
+    }
 }
