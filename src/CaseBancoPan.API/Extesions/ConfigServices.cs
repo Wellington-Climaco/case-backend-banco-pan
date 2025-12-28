@@ -54,4 +54,15 @@ public static class ConfigServices
         dbContext.Pessoas.AddRange(pessoa);
         dbContext.SaveChanges();
     }
+
+    public static IServiceCollection ConfigCors(this IServiceCollection services)
+    {
+        services.AddCors(options => options.AddDefaultPolicy(policy =>
+         {
+             policy.AllowAnyOrigin();
+             policy.AllowAnyMethod();
+             policy.AllowAnyHeader();
+         }));
+        return services;
+    }
 }

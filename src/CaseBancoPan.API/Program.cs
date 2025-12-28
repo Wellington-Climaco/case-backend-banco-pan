@@ -13,7 +13,8 @@ namespace CaseBancoPan.API
             builder.Services.ConfigDbContext(builder.Configuration);
             builder.Services.ConfigDependencyInjection();
             builder.Services.ConfigFluentValidation();
-            
+            builder.Services.ConfigCors();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -32,7 +33,7 @@ namespace CaseBancoPan.API
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
+            app.UseCors();
 
             app.MapControllers();
 
