@@ -58,3 +58,11 @@ Tentei ponderar entre a utilização de boas práticas, mas sem causar overengin
 
 - Entity
   - Responsável por garantir que somente sejam criadas instâncias com estado válido, por meio das validações internas, e também responsável por fornecer métodos para que a service possa mutar o estado da entidade de forma segura.
+
+## Testes
+
+- Para rodar os testes, entre na pasta raiz do projeto 'CaseBancoPan.Tests' e execute **dotnet test**
+
+- test coverage
+  - entity = 90%
+  - service = 72%
