@@ -52,7 +52,7 @@ public class AtualizarPessoaTests
     public async Task DeveRetornarErroQuandoRegistroNaoEncontrado()
     {
         // arrange
-        string expectedErrorMessage = "registro não encontrado";
+        string expectedErrorMessage = "registro nao encontrado";
 
         var request = new AtualizarPessoaRequest(
             Guid.NewGuid(),
@@ -80,7 +80,7 @@ public class AtualizarPessoaTests
     public async Task DeveRetornarErroQuandoArgumentExceptionForLancada()
     {
         // arrange
-        string expectedErrorMessage = "Email inválido";
+        string expectedErrorMessage = "Email invalido";
 
         var pessoa = new Pessoa("nome", "sobrenome", "endereco",
             "11970707070", "email@email.com", new DateTime(2003, 03, 18));

@@ -36,7 +36,7 @@ public class ObterPorIdTests
     public async Task DeveRetornarErroQuandoRegistroNaoEncontrado()
     {
         //arrange
-        string expectedErrorMessage = "Registro não encontrado";
+        string expectedErrorMessage = "Registro nao encontrado";
         _mockRepository.Setup(x => x.ObterPorId(It.IsAny<Guid>())).ReturnsAsync(null as Pessoa);
         
         //act

@@ -40,7 +40,7 @@ public class Pessoa
     public DateTime CreatedAt { get; private set; } = DateTime.Now;
     public DateTime? UpdatedAt { get; private set; }
 
-    private static bool VerificarMaioridade(DateTime hoje,DateTime dataNascimento) => dataNascimento.AddYears(18) <= hoje;
+    public static bool VerificarMaioridade(DateTime hoje,DateTime dataNascimento) => dataNascimento.AddYears(18) <= hoje;
     private static bool ValidarEmail(string email) => Regex.IsMatch(email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase);
     private static bool ValidarTelefone(string telefone) => !string.IsNullOrWhiteSpace(telefone) && telefone.Length == 11 && telefone.All(char.IsDigit);
     private static bool ValidarEndereco(string endereco) => !string.IsNullOrWhiteSpace(endereco);

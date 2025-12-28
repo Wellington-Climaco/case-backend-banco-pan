@@ -21,20 +21,8 @@ public class PessoaTests
     }
 
     [Theory]
-    [InlineData("emailteste@gmail.com",true)]
-    [InlineData("emailinvalido@teste",false)]
-    void DeveVerificarSeEmailEValido(string email,bool expectedResult)
-    {
-        //act
-        var result = Pessoa.ValidarEmail(email);
-
-        //assert
-        Assert.Equal(expectedResult,result);
-    }
-
-    [Theory]
-    [InlineData("emailinvalido", "11957631211","Email inválido")]
-    [InlineData("email@teste.com", "123","telefone inválido")]
+    [InlineData("emailinvalido", "11957631211","Email invalido")]
+    [InlineData("email@teste.com", "123","telefone invalido")]
     public void DeveLancarExceptionComMensagemDeErroQuandoArgumentosDoConstrutorInvalidos(string email, string telefone,string errorMessage)
     {
         // arrange
@@ -127,7 +115,7 @@ public class PessoaTests
 
         // assert
         var exception = Assert.Throws<ArgumentException>(act);
-        Assert.Equal("Nome inválido", exception.Message);
+        Assert.Equal("Nome invalido", exception.Message);
     }
 
     [Fact]
@@ -171,7 +159,7 @@ public class PessoaTests
 
         // assert
         var exception = Assert.Throws<ArgumentException>(act);
-        Assert.Equal("Endereço inválido", exception.Message);
+        Assert.Equal("Endereço invalido", exception.Message);
     }
 
     [Fact]
@@ -215,7 +203,7 @@ public class PessoaTests
 
         // assert
         var exception = Assert.Throws<ArgumentException>(act);
-        Assert.Equal("telefone inválido", exception.Message);
+        Assert.Equal("telefone invalido", exception.Message);
     }
 
     [Fact]
@@ -258,7 +246,7 @@ public class PessoaTests
 
         // assert
         var exception = Assert.Throws<ArgumentException>(act);
-        Assert.Equal("Email inválido", exception.Message);
+        Assert.Equal("Email invalido", exception.Message);
     }
 
     

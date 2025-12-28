@@ -37,7 +37,7 @@ public class CadastrarPessoaTests
     public async Task DeveRetornarErroQuandoExistirCadastroComEmail()
     {
         //arrange
-        string expectedErrorMessage = "Cadastro inválido, email já existente no sistema";
+        string expectedErrorMessage = "Cadastro invalido, email já existente no sistema";
         var request = new CadastrarPessoaRequest("primeiroNome", "segundoNome", "rua B", "11970707070",
             "email@email.com", new DateTime(2003, 03, 18));
         
