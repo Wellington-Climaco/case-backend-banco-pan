@@ -10,6 +10,8 @@ O endpoint de cadastro conta com algumas regras:
 - A pessoa precisa ter no mínimo 18 anos
 - Validação de formato dos demais campos(telefone,nome e etc)
 
+OBS: no start da API ela ira popular o banco com alguns registros afim de facilitar os testes.
+
 ## ⚙️ Tecnologias/Libs e Padrões utilizados
 
 - .NET 8
